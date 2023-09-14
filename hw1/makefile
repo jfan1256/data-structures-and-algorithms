@@ -4,7 +4,7 @@ CFLAGS = -std=c17 -Wall -Werror -pedantic -g
 all: Life
 
 clean:
-	rm -f Main
+	rm -f Life
 	rm -rf *.dSYM
 
 Life: main.c helpers.c life.c
