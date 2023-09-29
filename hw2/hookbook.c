@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
     // Initalize file to read
     FILE *input = fopen(argv[1], "r");
     if (input == NULL) {
-        fprintf(stderr, "Error opening file");
+        fprintf(stderr, "Error opening file\n");
         exit(1);
     }
     // Allocate memory for all_pirates
