@@ -32,7 +32,7 @@ pirate_list *list_create() {
 
 size_t list_index_of(pirate_list *pirates, pirate *p){
     for (size_t i = 0; i < list_length(pirates); i++){
-        if (pirate_compare(pirates->pirate_collection[i], p) == 0){
+        if (pirate_identical(pirates->pirate_collection[i], p) == 0){
             return i; 
         }
     }

@@ -71,9 +71,9 @@ int pirate_compare(pirate *a, pirate *b){
     const char* name2 = pirate_name(b);
     int len = strlen(name1);
     for (int i=0; i<len; i++){
-        if (tolower(name1[i]) > tolower(name2[i])) {
+        if (name1[i] > name2[i]) {
             return 1;
-        } else if (tolower(name1[i]) <  tolower(name2[i])) {
+        } else if (name1[i] <  name2[i]) {
             return -1;
         }
     }
@@ -92,4 +92,17 @@ void pirate_destroy(pirate *p){
     free(p);
 }
 
+int pirate_identical(pirate *a, pirate *b){
+    const char* name1 = pirate_name(a);
+    const char* name2 = pirate_name(b);
+    int len = strlen(name1);
+    for (int i=0; i<len; i++){
+        if (tolower(name1[i]) > tolower(name2[i])) {
+            return 1;
+        } else if (tolower(name1[i]) <  tolower(name2[i])) {
+            return -1;
+        }
+    }
+    return 0;
+}
 

@@ -13,7 +13,7 @@ Author: Alan Weide
 TO STUDENT: You may add to this file, but do not change anything that is
     already here!
 Modified by: [Jonathan Fan] on [09/26/2023]
-Changelog: [Completed typdef]
+Changelog: [Completed typdef and added pirate_identical]
 */
 
 /**
@@ -76,4 +76,9 @@ int pirate_compare(pirate *a, pirate *b);
  */
 void pirate_destroy(pirate *p);
 
+/**
+ * Compares two pirates to see if they are identical or not, returning a negative number, zero, or a positive
+ *  number as pirate a "comes before", is equal to, or "comes after" pirate b.
+ */
+int pirate_identical(pirate *a, pirate *b);
 #endif
