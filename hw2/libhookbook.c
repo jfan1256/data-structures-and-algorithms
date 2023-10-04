@@ -13,7 +13,9 @@ void organize(FILE *input, pirate_list *pirates){
             // Reached the end of the file
             break;
         }
-       append(pirates, curr_pirate);
+        // Append curr_pirate only if it is not in the pirate_list
+        if (list_index_of(pirates, curr_pirate) == list_length(pirates))
+            append(pirates, curr_pirate);
     }
     list_sort(pirates);
 }
