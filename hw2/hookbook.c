@@ -5,24 +5,23 @@
 #include <stdlib.h>
 #include <string.h>
 
-void test_remove_1(){
-    pirate_list* p = list_create();
-    pirate* r = pirate_create();
-    pirate_set_name(r, "Foo");
-    list_insert(p, r, 0);
-    pirate* r2 = list_remove(p, r);
-    if (list_length(p) == 0)
-    {
-        printf("test_remove_1 passed!\n");
-    }
-    else
-    {
-        printf("test_remove_1 failed!\n");
-    }
-    pirate_destroy(r2);
-    list_destroy(p);
-}
-
+// void test_remove_1(){
+//     pirate_list* p = list_create();
+//     pirate* r = pirate_create();
+//     pirate_set_name(r, "Foo");
+//     list_insert(p, r, 0);
+//     pirate* r2 = list_remove(p, r);
+//     if (list_length(p) == 0)
+//     {
+//         printf("test_remove_1 passed!\n");
+//     }
+//     else
+//     {
+//         printf("test_remove_1 failed!\n");
+//     }
+//     pirate_destroy(r2);
+//     list_destroy(p);
+// }
 
 int main(int argc, char* argv[]) {
     // Must only have one parameter
@@ -30,6 +29,7 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "ArgumentError: Must have 1 argument\n");
         exit(1);
     }
+
     // Initalize file to read
     FILE *input = fopen(argv[1], "r");
     if (input == NULL) {

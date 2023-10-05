@@ -15,7 +15,7 @@ pirate *pirate_create(){
         exit(1);
     }
     
-    new->name = strdup("N/A");
+    strcpy(new->name, "N/A");
     new->vessel = strdup("N/A");
     new->captain = strdup("N/A");
     new->num_treasure = 0;
@@ -36,8 +36,10 @@ pirate *pirate_read(FILE *input){
     if (extraline) {
         *extraline = '\0';
     }
-    free(curr_pirate->name);
-    curr_pirate->name = strdup(line);
+    // free(curr_pirate->name);
+    // curr_pirate->name = strdup(name);
+    strncpy(curr_pirate->name, line, MAX_LINE);
+    curr_pirate->name[MAX_LINE] = '\0';
 
     // This is where the extra functionality for PSET3 comes in
     // You would have to use realloc for skills to add different skillsets
@@ -62,8 +64,10 @@ const char *pirate_name(const pirate *p){
 }
 
 void pirate_set_name(pirate *p, const char *name){
-    free(p->name);
-    p->name = strdup(name);
+    // free(p->name);
+    // p->name = strdup(name);
+    strncpy(p->name, name, MAX_LINE);
+    p->name[MAX_LINE] = '\0';  
 }
 
 int pirate_compare(pirate *a, pirate *b){
@@ -81,7 +85,7 @@ int pirate_compare(pirate *a, pirate *b){
 }
 
 void pirate_destroy(pirate *p){
-    free(p->name);
+    // free(p->name);
     free(p->vessel);
     free(p->captain);
     free(p->fav_port);

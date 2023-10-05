@@ -1,5 +1,6 @@
 #ifndef __PIRATE_H__
 #define __PIRATE_H__
+#define MAX_LINE 127
 
 #include <stdio.h>
 #include <string.h>
@@ -20,7 +21,7 @@ Changelog: [Completed typdef]
  * Type of a pirate.
  */
 typedef struct{
-    char *name;
+    char name[MAX_LINE+1];
     char *vessel;
     char *captain;
     int num_treasure;

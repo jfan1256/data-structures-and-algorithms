@@ -44,7 +44,6 @@ pirate *list_insert(pirate_list *pirates, pirate *p, size_t idx){
     size_t pirate_idx = list_index_of(pirates, p);
     // Shift everything to the right
     if (pirate_idx == list_length(pirates)){
-        printf("inside\n");
         for (size_t j = pirates->length; j > idx; j--) {
             pirates->pirate_collection[j+1] = pirates->pirate_collection[j];
         }
@@ -59,23 +58,22 @@ pirate *list_insert(pirate_list *pirates, pirate *p, size_t idx){
 
 pirate *list_remove(pirate_list *pirates, pirate *p){
     size_t idx = list_index_of(pirates, p);
-    pirate *removed_pirate = NULL;
-    removed_pirate = pirates->pirate_collection[idx];
-
-    // Shift everything to the left
-    if (idx < list_length(pirates)){
-        for (size_t j = idx; j < pirates->length - 1; j++) {
-            pirates->pirate_collection[j] = pirates->pirate_collection[j + 1];
-        }
-        // Subtract 1 from length of pirate collection and nullify the last index
-        pirates->pirate_collection[pirates->length - 1] = NULL;
-        pirates->length--;
-        list_contract_if_necessary(pirates);
-        pirate_destroy(removed_pirate);
-        return removed_pirate;
-    } else {
+    // If pirate not in list
+    if (idx == list_length(pirates)){
         return NULL;
     }
+
+    pirate *removed_pirate = pirates->pirate_collection[idx];
+
+    // Shift everything to the left
+    for (size_t j = idx; j < pirates->length - 1; j++) {
+        pirates->pirate_collection[j] = pirates->pirate_collection[j + 1];
+    }
+    // Subtract 1 from length of pirate collection and nullify the last index
+    pirates->pirate_collection[pirates->length - 1] = NULL;
+    pirates->length--;
+    list_contract_if_necessary(pirates);
+    return removed_pirate;
 }
 
 pirate *list_access(pirate_list *pirates, size_t idx){
@@ -198,9 +196,8 @@ void list_contract_if_necessary(pirate_list *pirates){
         size_t new_capacity = pirates->capacity / RESIZE_FACTOR;
         pirate** contract_collection = realloc(pirates->pirate_collection, new_capacity * sizeof(pirate*));
         if (contract_collection == NULL) {
-            // Handle memory allocation failure
             fprintf(stderr, "MemoryError: Cannot contract the pirate list.\n");
-            exit(1);  // Or handle the error as appropriate
+            exit(1);
         }
         pirates->pirate_collection = contract_collection;
         pirates->capacity = new_capacity;
