@@ -36,6 +36,13 @@ int main(int argc, char* argv[]) {
         fprintf(stderr, "Error opening file\n");
         exit(1);
     }
+
+    // Checks for invalid files (i.e., empty files, n/a files, etc.)
+    if (!is_valid_file(argv[1])) {
+        fprintf(stderr, "pirate file is invalid or empty\n");
+        exit(1);
+    }
+
     // Allocate memory for all_pirates
     pirate_list *all_pirates = list_create();
     // Append pirates and sort all_pirates

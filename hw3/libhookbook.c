@@ -1,9 +1,9 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <sys/stat.h>
+#include "libhookbook.h"
 #include "pirate.h"
 #include "pirate_list.h"
-#include "libhookbook.h"
-#include <sys/stat.h>
-#include <stdbool.h>
-#include <stdio.h>
 
 /**
  * Checks if a file is valid or not
@@ -30,23 +30,29 @@ bool is_valid_file(const char* filename) {
     return true;
 }
 
+
 /**
  * Append pirates to pirate_list from input file and sort it
 */
-void organize(FILE *input, pirate_list *pirates){
+void organize(FILE *restrict pirate_file, FILE *restrict captain_file, pirate_list *pirates){
     while(1){
-        pirate *curr_pirate = pirate_read(input);
+        pirate *curr_pirate = pirate_read(pirate_file);
         if (curr_pirate == NULL) {
             // Reached the end of the file
             break;
         }
-        // Append curr_pirate only if it is not in the pirate_list
+        // Append curr_pirate only if it is not in the pirate_list --> this ensures no duplicates and only the first instance is stored
         if (list_index_of(pirates, curr_pirate) == list_length(pirates)){
             append(pirates, curr_pirate);
         } else {
             pirate_destroy(curr_pirate);
         } 
     }
+
+    // Read captain file and set captains
+    pirate_read_captain(captain_file, pirates);
+
+    // Sort the list
     list_sort(pirates);
 }
 

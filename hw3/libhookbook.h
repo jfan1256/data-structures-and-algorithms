@@ -3,14 +3,16 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "pirate_list.h"
 #include "pirate.h"
+#include "pirate_list.h"
 
 /*
 Use this file to encapsulate generally useful functionality that doesn't belong
 in either pirate.h or pirate_list.h.
 
 Author: [Jonathan Fan]
+Modified by: [Jonathan Fan] on [10/13/2023]
+Changelog: [Added: All the required functionalities for libhookbook]
 */
 
 /**
@@ -19,9 +21,9 @@ Author: [Jonathan Fan]
 bool is_valid_file(const char* filename);
 
 /**
- * Creates the pirate list from input file and sorts it
+ * Creates the pirate list from input file, sets the captains, and sorts it
 */
-void organize(FILE *input, pirate_list *pirates);
+void organize(FILE *restrict pirate_file, FILE *restrict captain_file, pirate_list *pirates);
 
 /**
  * Print the pirates in pirate_collection
